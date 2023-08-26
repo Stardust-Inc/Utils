@@ -6,6 +6,7 @@ import java.io.IOException;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import com.stardust.utils.Teleport;
 import com.stardust.utils.UtilsListener;
@@ -33,6 +34,7 @@ public class UtilsPlugin extends JavaPlugin implements CommandExecutor {
         tport_loc,
         tport_wild,
         chat_clear,
+        tport_save,
         tport_spawn,
     }
 
@@ -70,6 +72,7 @@ public class UtilsPlugin extends JavaPlugin implements CommandExecutor {
         final Player player = (Player) sender;
 
         Cmd.build()
+                .addCase(tport_save,                    () -> save(player, args))
                 .addCase(tport_loc,                         teleport::onCommandGoLoc)
                 .addCase(tport_wild,                    () -> teleport.toWild(player))
                 .addCase(tport_spawn,                   () -> teleport.toSpawn(player, config.getString("spawn").split(" "), Bukkit.getServer().getWorld("spawn")))
@@ -98,9 +101,24 @@ public class UtilsPlugin extends JavaPlugin implements CommandExecutor {
 
             final String[] coordinates = config.getString(loc).split(" ");
 
-            teleport.toSpawn(player, coordinates, player.getWorld());
+            teleport.toSpawn(player, coordinates, Bukkit.getServer().getWorld("world"));
             return;
         }
         player.sendMessage("Usage: /tport for tport info or /help tport for more info"); 
+    }
+
+    public void save(Player player, String[] args) {
+        if (args.length == 2) {
+            String locName = args[1];
+            Location loc = player.getLocation();
+
+            config.options().copyDefaults(true);
+            config.addDefault(locName, "" + loc.getX() + " " + loc.getY() + " " + loc.getZ());
+            saveConfig();
+            player.sendMessage("Location saved!"); 
+            return;
+        }
+        player.sendMessage("Please provide a name for your destination as follows: /tport save <name_of_destination>"); 
+        return;
     }
 }

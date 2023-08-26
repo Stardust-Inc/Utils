@@ -42,8 +42,7 @@ public class Teleport {
 
     public static Location toWild(Player player) {
         Location playerLoc = player.getLocation();
-        // World world = Bukkit.getServer().getWorld("world");
-        World world = player.getWorld();
+        World world = Bukkit.getServer().getWorld("world");
 
         Position playerPos = new Position((int) playerLoc.getX(), (int) playerLoc.getY(), (int) playerLoc.getZ());
         System.out.println(player.getName() + " selected world portal at position " + playerPos.toString());
@@ -78,9 +77,9 @@ public class Teleport {
     }
 
     public static Location toSpawn(Player player, String[] spawn, World world) {
-        final int x = Integer.parseInt(spawn[0]); 
-        final int y = Integer.parseInt(spawn[1]); 
-        final int z = Integer.parseInt(spawn[2]);
+        final int x = Math.round(Float.parseFloat(spawn[0])); 
+        final int y = Math.round(Float.parseFloat(spawn[1])); 
+        final int z = Math.round(Float.parseFloat(spawn[2]));
 
         final Location spawnLoc = new Location(world, x, y, x);
         player.teleport(spawnLoc);
