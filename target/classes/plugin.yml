@@ -1,0 +1,13 @@
+main: com.stardust.utils.UtilsPlugin
+name: Utils
+version: 0.1
+load: STARTUP
+depend: [DBPlugin]
+authors: [ travis, ahmed ]
+commands:
+  tport:
+    description: "Teleport commands"
+    usage: /tport [command]
+  chat:
+    description: "Clear commands"
+    usage: /chat
