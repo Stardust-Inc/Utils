@@ -20,4 +20,4 @@ Inside this file, you can add other locations and use the command
 to go to other pre-defined locations
 
 ## Demo
-![ezgif com-resize](https://github.com/Stardust-Inc/Utils/assets/99296689/e18ee62a-ca7c-42b5-a1e4-2bc806ed1df9)
+<img src="https://github.com/Stardust-Inc/Utils/assets/124848859/6fba3fd5-c875-4707-b622-937a5196d995" width=550x550 />
