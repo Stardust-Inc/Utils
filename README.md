@@ -20,4 +20,4 @@ Inside this file, you can add other locations and use the command
 to go to other pre-defined locations
 
 ## Demo
-<img src="https://github.com/Stardust-Inc/Utils/assets/124848859/6fba3fd5-c875-4707-b622-937a5196d995" width=550x550 />
+<img src="https://github.com/Stardust-Inc/Utils/assets/99296689/851e79dc-726f-49d0-9912-ccc47eca572b"/>
