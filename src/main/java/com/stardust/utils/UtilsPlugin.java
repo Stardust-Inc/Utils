@@ -70,17 +70,29 @@ public class UtilsPlugin extends JavaPlugin implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) return false;
         final Player player = (Player) sender;
-
-        Cmd.build()
-                .addCase(tport_save,                    () -> save(player, args))
-                .addCase(tport_loc,                         teleport::onCommandGoLoc)
-                .addCase(tport_wild,                    () -> teleport.toWild(player))
-                .addCase(tport_spawn,                   () -> teleport.toSpawn(player, config.getString("spawn").split(" "), Bukkit.getServer().getWorld("spawn")))
-                .addCase(chat_clear, () -> {
-                    for (Integer i = 0; i < 100; i++) player.sendMessage("\n");
-                })
-                .addDefaultCase(                        () -> messageGeneralUsage(player, args))
-                .execute(player, args);
+        switch (label) {
+            case "tport": {
+                switch (args[0]) {
+                    case "save": save(player, args); break;
+                    case "loc": teleport.onCommandGoLoc(player, args); break;
+                    case "wild": teleport.toWild(player); break;
+                    case "spawn":  teleport.toSpawn(player, config.getString("spawn").split(" "), Bukkit.getServer().getWorld("spawn")); break;
+                    default: break;
+                }
+                break;
+            }
+            case "chat": {
+                switch (args[0]) {
+                    case "clear": {
+                        for (Integer i = 0; i < 100; i++) player.sendMessage("\n");
+                        break;
+                    }
+                    default: break;
+                }
+                break;
+            }
+            default: messageGeneralUsage(player, args); break;
+        }
         return true;
     }
 
